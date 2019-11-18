@@ -1,0 +1,67 @@
+{include file='public/header' title=$title/}
+    <link rel="stylesheet" href="__CSS_PATH__product.css">
+    <!-- 广告图开始 -->
+    <section>
+        <div class="zhegai"></div>
+    </section>
+    <!-- 广告图结束 -->
+    <!-- 主体内容开始 -->
+    <div class="container">
+        <div class="row">
+            <div class="xiangqing">
+                <div class="title">
+                    <h1>{$goods.gname}</h1>
+                </div>
+                <div class="zhanshi">
+                    <div class="banner-container">
+                        <div class="banner">
+                            <ul>
+                            {volist name="banner" id="ban"}
+                                <li class="img">
+                                    <img src="{$ban}" alt="">
+                                </li>
+                            {/volist}
+
+                            </ul>
+                            <div class="btn left"></div>
+                            <div class="btn right"></div>
+                            <div class="banner-dot">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="money">
+                        <div class="MarketPrice">
+                            <span>市场价：￥{$goods.gmprice}</span>
+                        </div>
+                        <div class="RetailPrice">
+                            <span>零售价：</span>
+                            <span>
+                                <strong>￥{$goods.gsale}</strong>
+                            </span>
+                        </div>
+                        <hr>
+                        <div class="stock">
+                            <span>库存状况：{$goods['gstock']}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="jieshao" class="col-sm-12 col-xs-12">
+                    <div class="shop-title">
+                        <span>商品介绍</span>
+                    </div>
+                    <div class="shop-xiangqing">
+                        {$goods['gdetail']}
+                    </div>
+                    <div class="shop-xiangqing2">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 主体内容结束 -->
+{include file='public/footer' /}
+<script src="__JS_PATH__product.js"></script>

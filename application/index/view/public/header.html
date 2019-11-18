@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$title}</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1351160_ne6jrxlcrwa.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1351160_n13lb1rmev.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1352033_b7djp1d6iir.css">
+    <link rel="stylesheet" href="__CSS_PATH__bootstrap.min.css">
+    <link rel="stylesheet" href="__CSS_PATH__swiper.min.css">
+    <link rel="stylesheet" href="__CSS_PATH__index.css">
+    <link rel="stylesheet" href="__CSS_PATH__animate.css">
+    <link rel="stylesheet" href="__CSS_PATH__coms.css">
+</head>
+
+<body>
+<!-- header开始 -->
+<a name="top"></a>
+<!-- 导航浮出效果 -->
+<div class="hd-up animated">
+    <div class="container">
+        <div class="logo-" style="height: 57.6px">
+            <div class="logo">
+                <img src="__IMG_PATH__index/tx1.png" alt="logo" style="width: 115.89px;">
+            </div>
+        </div>
+        <ul class="menu" style="height: 57.6px;padding: 10px 0;box-sizing: border-box;">
+            <div class="menu-">
+                <li class="menu-item"><a href="{:url('index/index/index')}" style="color:{$nid==0?'#FF6000':'#777777'}" >首页</a></li>
+                {volist name='navs' id="v"}
+                <li class="menu-item" ><a  style="color:{$v['id']==$nid?'#FF6000':'#777777'}" href="/flower2/public/index.php/index/category/index?nid={$v['id']}">{$v['nname']}</a></li>
+                {/volist}
+            </div>
+
+        </ul>
+    </div>
+</div>
+<!-- 头部开始 -->
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo-">
+                <div class="logo">
+                    <img src="__IMG_PATH__index/tx1.png" alt="logo">
+                </div>
+            </div>
+            <ul class="menu">
+                <div class="menu-">
+                    <li class="menu-item"><a href="{:url('index/index/index')}" style="color:{$nid==0?'#FF6000':'#777777'}" >首页</a></li>
+                    {volist name='navs' id="v"}
+                    <li class="menu-item" ><a style="color:{$v['id']==$nid?'#FF6000':'#777777'}" href="/flower2/public/index.php/index/category/index?nid={$v['id']}">{$v['nname']}</a></li>
+                    {/volist}
+                </div>
+
+            </ul>
+        </nav>
+        <div class="menu-bar-top ">
+            <div class="bar-up">
+                <a href="#" class="menu-bar-top-text">
+                    <span>首页</span>
+                    <i class="iconfont icon-xiajiantou"></i>
+                </a>
+            </div>
+            <div class="bar-up" style="display: none">
+                <a href="#" class="menu-bar-top-text">
+                    <span>关闭</span>
+                    <i class="iconfont icon-xiajiantou"></i>
+                </a>
+            </div>
+            <!-- <div class="kong col-xs-2"></div> -->
+            <div class="bar-down">
+                <a href="{:url('index/index/index')}" class="menu-bar-top-text first ">
+                    <span>首页</span>
+                    <i class="iconfont icon-xiajiantou"></i>
+                </a>
+                {volist name='navs' id="v"}
+
+                <a href="/flower2/public/index.php/index/category/index?nid={$v['id']}" class="menu-bar-top-text first ">
+                    <span>{$v['nname']}</span>
+                </a>
+                {/volist}
+            </div>
+            <!-- <div class="kong col-xs-2"></div> -->
+
+        </div>
+        <div class="menu-bar-bottom ">
+            <a href="zxyy.html">
+                <span>在线预约</span>
+            </a>
+        </div>
+    </div>
+</header>
+<!-- 头部结束 -->
+<!-- header结束 -->

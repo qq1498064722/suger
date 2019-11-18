@@ -1,0 +1,61 @@
+{include file='public/header' title=$title/}
+    <link rel="stylesheet" href="__CSS_PATH__xwzx.css">
+    <link rel="stylesheet" href="__CSS_PATH__news.css">
+    <!-- 背景 -->
+    <div class="container">
+        <div class="row">
+            <div class="beijing">
+                <div class="beijing-2">
+                    <!-- 图片 -->
+                    <div class="tupian">
+                        <img src="__IMG_PATH__news/BannerTwo.jpg" alt="src">
+                    </div>
+                    <!-- 养护知识开始 -->
+                    <div class="fg col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class=" fg-left "></div>
+                        <div class="flow  ">
+                            <div class="top ">浪漫花语</div>
+                            <div class="down">Knowledgement</div>
+
+
+                        </div>
+                        <div class=" fg-right "></div>
+                    </div>
+                    <!-- 养护知识结束 -->
+                    <!-- 内容开始 -->
+                    <div class="wenben col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="wenben-1">
+                            <div class="xiuche">{$news['wname']}</div>
+                            <div class="riqi">发布日期： {$news['wtime']}</div>
+                            <div class="qiche">
+                                {$news['wdetail']}
+                                </div>
+
+                            <div class="dianji">
+                                <div class="left"><a href="news?wid={$jumpt['wid']}">&nbsp{$jumpt['wname']}</a></div>
+                                <div class="right"><a href="news?wid={$jumpb['wid']}">{$jumpb['wname']}&nbsp</a></div>
+                            </div>
+                            <!-- 返回按钮 -->
+                            <div class="return"> <a href="index?nid=6">返回列表</div>
+                    <!-- 返回按钮结束 -->
+                </div>
+            </div>
+            <div class="kong">
+
+            </div>
+            <div class="tupian-2">
+                <div class="tpbj">
+                    <img src="__IMG_PATH__news/BannerThree.jpg" alt="src">
+                </div>
+            </div>
+            <!-- 内容结束 -->
+
+            <!-- 背景结束 -->
+        </div>
+    </div>
+</div>
+</div>
+<!-- 、、、、、、、、、、、、、、、底部、、、、、、、、、、、、、 -->
+<div class="content" style="height: 300px;"></div>
+{include file='public/footer' /}
+<script src="__JS_PATH__com.js"></script>

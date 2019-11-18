@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加新闻</title>
+    <link rel="stylesheet" href="/flower2/public/static/css/layui.css">
+    <style>
+    </style>
+</head>
+<body>
+<form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">新闻名称</label>
+        <div class="layui-input-block">
+            <input lay-verify="required" type="text" name="wname" placeholder="请输入新闻名称" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">新闻详情</label>
+        <div class="layui-input-block">
+            <textarea class="layui-input" type="text"  id="wdetail" name="wdetail"  autocomplete="off" placeholder="请输入新闻详情" style="display: none;"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="go">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+</body>
+</html>
+<script src="/flower2/public/static/layui.js"></script>
+<script>
+    layui.use(['form','layedit','layer'], function () {
+        let form = layui.form, $ = layui.$,layedit=layui.layedit,layer=layui.layer;
+        let index = layedit.build('wdetail',{
+            height: 150, //设置编辑器高度
+        });
+        form.on('submit(go)', function (data) {
+            let qs = data.field;
+            delete qs.file;//截取字段file
+            qs.wdetail = layedit.getContent(index);
+            $.ajax({
+                url: '/flower2/public/index.php/admin/news/insert',
+                type: 'POST',
+                dataType: 'json',
+                data: qs,
+                success: function (res) {
+                    if(res.code==200){
+                        layer.alert(res.msg);
+                        $('form')[0].reset();
+                        layedit.setContent(index,'',false);
+                    }else {
+                        layer.alert(res.msg);
+                    }
+
+                }
+            })
+            return false;
+        })
+    })
+</script>

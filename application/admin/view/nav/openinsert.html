@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加导航</title>
+    <link rel="stylesheet" href="/flower2/public/static/css/layui.css">
+    <style>
+    </style>
+</head>
+<body>
+<form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">导航名称</label>
+        <div class="layui-input-block">
+            <input lay-verify="required|nname" type="text" name="nname" placeholder="请输入导航名称" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">英文名称</label>
+        <div class="layui-input-block">
+            <input lay-verify="required|ename" type="text" name="ename" placeholder="请输入导航英文名称" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">导航排序</label>
+        <div class="layui-input-block">
+            <input lay-verify="required|nsort" type="text" name="nsort" placeholder="请输入导航序号" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">导航模板</label>
+        <div class="layui-input-block">
+            <input lay-verify="required|ntpl" type="text" name="ntpl" placeholder="请输入导航模板" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="go">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+</body>
+</html>
+<script src="/flower2/public/static/layui.js"></script>
+<script>
+    layui.use('form', function () {
+        let form = layui.form, $ = layui.$;
+        form.on('submit(go)', function (data) {
+            let qs = data.field;
+            // console.log(qs);
+            $.ajax({
+                url: '/flower2/public/index.php/admin/nav/insert',
+                type: 'POST',
+                dataType: 'json',
+                data: qs,
+                success: function (res) {
+                    if(res.code==200){
+                        $('form')[0].reset();
+                        layer.alert(res.msg);
+                        // form.reset();
+                    }else {
+                        layer.alert(res.msg);
+                    }
+
+                }
+            })
+            return false;
+        })
+        //表单验证
+        form.verify({
+            nname: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '导航名称不能有特殊字符';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '导航名称首尾不能出现下划线\'_\'';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '导航名称不能全为数字';
+                }
+            },
+            ename:[/^[a-zA-Z][a-zA-Z\s]{2,49}$/, '请输入3位以上英文字母'],
+            nsort:[/^[\d\d\d]{0,8}$/,'请输入三位数以内数字'],
+            ntpl:[/^[a-zA-Z][a-zA-Z\s]{2,49}$/, '请输入3位以上英文字母'],
+
+        })
+    })
+</script>

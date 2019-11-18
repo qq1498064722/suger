@@ -1,0 +1,52 @@
+{include file='public/header' title=$title/}
+<link rel="stylesheet" href="__CSS_PATH__xwzx.css">
+<!-- 、、、、、、、、、、、、、、、、、、 -->
+<div class="container">
+    <div class="row">
+        <div class="beijing">
+            <div class="beijing-2">
+                <!-- 图片 -->
+                <div class="tupian">
+                    <img src="__IMG_PATH__news/BannerTwo.jpg" alt="src">
+                </div>
+                <!-- 养护知识开始 -->
+
+                <div class="fg col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class=" fg-left "></div>
+                    <div class="flow  ">
+                        <div class="top ">{$currnav.nname}</div>
+                        <div class="down">{$currnav.ename}</div>
+                    </div>
+                    <div class="fg-right "></div>
+                </div>
+                <!-- 养护知识结束 -->
+                <div class="neirong fg col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <ul class="mrzs-ul">
+                        {volist name='news' id="ev"}
+                        <a href="news?wid={$ev['wid']}">
+                            <li class="mrzs-li">
+                                {$ev['wname']}
+                                <span>{$ev['wtime']}</span>
+                            </li>
+                        </a>
+                        {/volist}
+                    </ul>
+                </div>
+                <!-- 结束 -->
+                <div class="kongwei col-lg-12 fg col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                </div>
+                <div class="tupian-2 ">
+                    <div class="tpbj ">
+                        <img src="__IMG_PATH__news/BannerThree.jpg " alt="src ">
+                    </div>
+                </div>
+                <!-- 内容结束 -->
+                <!-- 背景结束 -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 、、、、、、、、、、、、、、、、、、、、、、、、、、、、、 -->
+<div class="content" style="height: 300px;"></div>
+{include file='public/footer' /}
+<script src="__JS_PATH__com.js"></script>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/flower2/public/static/js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px; height: 400px;"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // let myChart = echarts.init(document.getElementById('main'));
+    option = {
+        legend: {},
+        tooltip: {},
+        dataset: {
+            source: [
+                ['product', '2012', '2013', '2014', '2015'],
+                ['紫皮糖', 41.1, 30.4, 65.1, 53.3],
+                ['香体糖', 86.5, 92.1, 85.7, 83.1],
+                ['薄荷糖', 24.1, 67.2, 79.5, 86.4]
+            ]
+        },
+        xAxis: [
+            {type: 'category', gridIndex: 0},
+            {type: 'category', gridIndex: 1}
+        ],
+        yAxis: [
+            {gridIndex: 0},
+            {gridIndex: 1}
+        ],
+        grid: [
+            {bottom: '55%'},
+            {top: '55%'}
+        ],
+        series: [
+            // These series are in the first grid.
+            {type: 'bar', seriesLayoutBy: 'row'},
+            {type: 'bar', seriesLayoutBy: 'row'},
+            {type: 'bar', seriesLayoutBy: 'row'},
+            // These series are in the second grid.
+            {type: 'bar', xAxisIndex: 1, yAxisIndex: 1},
+            {type: 'bar', xAxisIndex: 1, yAxisIndex: 1},
+            {type: 'bar', xAxisIndex: 1, yAxisIndex: 1},
+            {type: 'bar', xAxisIndex: 1, yAxisIndex: 1}
+        ]
+    };
+</script>

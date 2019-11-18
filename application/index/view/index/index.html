@@ -1,0 +1,186 @@
+{include file='public/header' /}
+    <title>糖果项目</title>
+    <link rel="stylesheet" href="__CSS_PATH__index.css">
+    <!-- 轮播图开始 -->
+    <div class="banner">
+        <div class="img-box swiper-container">
+            <div class="img swiper-wrapper" width="100%">
+                <div class="swiper-slide" width="100%" style="z-index:100;background-image: url(__IMG_PATH__index/Bannerone.jpg);background-size: cover;background-position: center center;">
+                </div>
+                <div class="swiper-slide" style="background-image: url(__IMG_PATH__index/BannerTwo.jpg);background-size: cover;background-position: center center;">
+                </div>
+            </div>
+
+        </div>
+        <div class="swiper-pagination banner-dot">
+        </div>
+        <div class="btn btn-left swiper-button-prev">
+        </div>
+        <div class="btn btn-right swiper-button-next">
+        </div>
+    </div>
+    <!-- 轮播图结束 -->
+    <div class="kong">
+
+    </div>
+    <!-- 内容部分开始 -->
+    <div class="all container">
+        <div class="row">
+            <!-- 小标题部分开始 -->
+            <div class="font-text">
+                <div class=" text-title">
+                    最幸福的是就是和朋友一起分享糖果
+                </div>
+                <div class="text-p">
+                    为什么选择我们，带你走进甜蜜的世界
+                </div>
+            </div>
+            <!-- 小标题部分结束 -->
+            <!-- 四小部分开始 -->
+            <div class="tuijian">
+                <div class="tj-itme animated  ">
+                    <div class="img">
+                        <img src="__IMG_PATH__index/cp1.jpg" alt="">
+                    </div>
+                    <div class="title">
+                        愿景
+                    </div>
+                    <div class="title-fg">
+                        <img src="__IMG_PATH__index/fg1.png" alt="">
+                    </div>
+                    <div class="font-p">
+                        一粒放到嘴里体现最美的舌尖盛宴
+                    </div>
+                </div>
+                <div class="tj-itme animated ">
+                    <div class="img ">
+                        <img src="__IMG_PATH__index/cp2.jpg" alt="">
+                    </div>
+                    <div class="title">
+                        轻巧易携带
+                    </div>
+                    <div class="title-fg">
+                        <img src="__IMG_PATH__index/fg1.png" alt="">
+                    </div>
+                    <div class="font-p">
+                        增进友情的必备神器
+                    </div>
+                </div>
+                <div class="tj-itme animated ">
+                    <div class="img">
+                        <img src="__IMG_PATH__index/cp3.jpg" alt="">
+                    </div>
+                    <div class="title">
+                        好吃不贵
+                    </div>
+                    <div class="title-fg">
+                        <img src="__IMG_PATH__index/fg1.png" alt="">
+                    </div>
+                    <div class="font-p">
+                        各种口味的糖果应有尽有
+
+
+                    </div>
+                </div>
+                <div class="tj-itme animated  ">
+                    <div class="img">
+                        <img src="__IMG_PATH__index/cp4.jpg" alt="">
+                    </div>
+                    <div class="title">
+                        强大的售后保障
+                    </div>
+                    <div class="title-fg">
+                        <img src="__IMG_PATH__index/fg1.png" alt="">
+                    </div>
+                    <div class="font-p">
+                        强大的服务后台和管理体系为您的权益提供保障
+                    </div>
+                </div>
+            </div>
+            <!-- 四小部分结束 -->
+
+            <!-- 引领时代部分开始 -->
+            <div class="yinl">
+                <div class="yinl-title">
+                    用一粒糖果，暖到朋友的心
+                </div>
+                <div class="yinl-img">
+                    <img src="__IMG_PATH__index/fg.png" alt="">
+                </div>
+
+            </div>
+            <!-- 引领时代部分结束 -->
+
+            <!-- 公司简介部分开始 -->
+            <div class="gsjj">
+                <div class="gsjj-img col-md-4 animated ">
+                    <img src="__IMG_PATH__index/cp3s.jpg" alt="">
+                </div>
+                <div class="gsjj-right col-md-8">
+                    <div class="gsjj-title ">
+                        公司简介
+                        <div class="more">
+                            <a href="about.html"> MORE+</a>
+                        </div>
+                    </div>
+                    <div class="gsjj-p">
+                        <div class="gsji-p1">
+                            咖啡豆糖果公司是专业的糖果制作企业，公司位于中国天京市，占地面积近300多平方米。公司环境优雅、设施齐全、专业性强、服务周到。是中国优秀的糖果公司之一，也是中国知名大型综合糖果服务中心之一。</div>
+                        <div class="gsjj-p2">
+                            我司聘请了专业的糖果塑性师、果汁适配师，为您的口味提供全方位的优质服务。
+                            　　为保证您吃的舒服、公司设有专业的果汁适配、糖果塑性各种款式应有尽有。</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 公司简介部分结束 -->
+            <!-- 美容知识开始 -->
+            <div class="mrzs">
+                <div class="mrzs-left  col-md-8">
+                    <div class="mrzs-title ">
+                        甜蜜糖果
+                        <div class="more">
+                            <a href="xwzx.html"> MORE+</a>
+                        </div>
+                    </div>
+                    <div class="mrzs-p">
+                        <ul class="mrzs-ul">
+                            {volist name='news' id="ev"}
+                            <a href="news?wid={$ev['wid']}">
+                                <li class="mrzs-li">
+                                    {$ev['wname']}
+                                    <span>{$ev['wtime']}</span>
+                                </li>
+                            </a>
+                            {/volist}
+                        </ul>
+                    </div>
+                </div>
+                <div class="mrzs-img  col-md-4 animated ">
+                    <img src="__IMG_PATH__index/cp4.jpg" alt="">
+                </div>
+            </div>
+            <!-- 美容知识结束 -->
+
+        </div>
+    </div>
+    <!-- 内容部分结束 -->
+{include file='public/footer' /}
+<script src="__JS_PATH__index.js"></script>
+<script src="__JS_PATH__swiper.min.js"></script>
+<script src="__JS_PATH__com.js"></script>
+
+<!-- <script src="__JS_PATH__index.js"></script> -->
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: true, //可选选项，自动滑动
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    })
+</script>

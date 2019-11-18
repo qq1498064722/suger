@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suger管理系统</title>
+    <link rel="stylesheet" href="/flower2/public/static/css/layui.css">
+    <link rel="stylesheet" href="/flower2/public/static/lion/css/reset.min.css">
+    <link rel="stylesheet" href="/flower2/public/static/lion/css/style.css">
+<style>
+    .layui-tab{
+        position: relative;
+        width: 100%;
+        height: calc(100% - 20px);
+    }
+
+    .layui-tab .layui-tab-content{
+        position: absolute;
+        top:41px;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .layui-tab-content >.layui-tab-item{
+        width: 100%;
+        height: 100%;
+    }
+
+    iframe{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">咖啡豆后台管理</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="/flower2/public/static/images/tx.jpg"  class="layui-nav-img">
+                    {$username['username']}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">导航管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="11" data-url="/flower2/public/admin/nav/openinsert"><a href="javascript:;">添加导航</a></dd>
+                        <dd data-id="12" data-url="/flower2/public/admin/nav/index"><a href="javascript:;">查看导航</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">商品分类</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="21" data-url="/flower2/public/admin/category/index"><a href="javascript:;">查看分类</a></dd>
+                        <dd data-id="22" data-url="/flower2/public/admin/category/openinsert"><a href="javascript:;">添加分类</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">商品管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="31" data-url="/flower2/public/admin/goods/openinsert"><a href="javascript:;">添加商品</a></dd>
+                        <dd data-id="32" data-url="/flower2/public/admin/goods/index"><a href="javascript:;">查看商品</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">新闻管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="41" data-url="/flower2/public/admin/news/openinsert"><a href="javascript:;">添加新闻</a></dd>
+                        <dd data-id="42" data-url="/flower2/public/admin/news/index"><a href="javascript:;">查看新闻</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">预约管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="51" data-url="/flower2/public/admin/oppim/index"><a href="javascript:;">查看预约</a></dd>
+                    </dl>
+                </li> <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;">数据管理</a>
+                <dl class="layui-nav-child">
+                    <dd data-id="53" data-url="/flower2/public/admin/shuju/shuju"><a href="javascript:;">数据可视化</a></dd>
+                </dl>
+            </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px; width: 100%; height: 100%; box-sizing: border-box;">
+            <div class="layui-tab" lay-filter="demo" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">首页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div id="world"></div>
+                        <div id="instructions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        <!--© layui.com - 底部固定区域-->
+    </div>
+</div>
+</body>
+</html>
+<script src="/flower2/public/static/lion/js/three.min.js"></script>
+<script src="/flower2/public/static/lion/js/OrbitControls.js"></script>
+<script src="/flower2/public/static/layui.js"></script>
+<script src="/flower2/public/static/lion/js/index.js"></script>
+
+<script>
+    //JavaScript代码区域
+    layui.use(['element', 'layer', 'form'], function () {
+        let layer = layui.layer, $ = layui.$, element = layui.element;
+        $('dd').on('click', function () {
+            //let text = $(this).find('a').text();//后代
+            let text = $(this).children('a').text();//子代
+            //let text = $(this).children('a',this).text();//范围变小，this下的a标签
+            let did = this.dataset.id;//拿到dd标签中的属性data-id
+            let lid = $(".layui-tab-title li");//let lid = $('li['lay-id']');
+            let flag = false;
+            //  方法1
+            // for (let i = 0; i < lid.length; i++) {
+            //     //attributes属性返回指定节点属性的集合
+            //     // lid[i].getAttribute('lay-id');
+            //     // lid[i].attr('lay-id');有问题
+            //     if (did == lid[i].attributes[0].nodeValue) {
+            //         element.tabChange('demo', did);
+            //         flag = true;
+            //     }
+            // }
+            // if (flag == false) {
+            //     element.tabAdd('demo', {
+            //         title: text,
+            //         content: text,
+            //         id: did,
+            //     });
+            // } // 结束
+
+            //  方法2
+            let arr = lid.map(function (index, element) {
+                return element.getAttribute('lay-id');
+            })
+            flag = Array.from(arr).some(ele => ele == did);
+            //flag = Array.prototype.some.call(arr,ele=>ele==did);转为数组的第二种方法
+            if (flag) {
+                element.tabChange('demo', did);
+            } else {
+                let urls = this.dataset.url;
+                element.tabAdd('demo', {
+                    title: text,
+                    content:
+                        `<iframe frameborder="0" src="${urls}"></iframe>`,
+                    id: did,
+                });
+            }//结束
+        });
+    });
+</script>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>查看商品</title>
+    <link rel="stylesheet" href="/flower2/public/static/css/layui.css " media="all">
+    <style>
+        .img {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<form class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">所属分类</label>
+            <div class="layui-input-inline">
+                <select name="cid">
+                    <option value="">请选择分类</option>
+                    {volist name='cates' id='v'}
+                    <option value="{$v.id}">{$v.cname}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">商品名称</label>
+            <div class="layui-input-inline" style="width: 150px;">
+                <input type="text" name="gname" placeholder="请输入关键字" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">范围</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="price_max" placeholder="￥" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" lay-submit lay-filter="demo1">搜索</button>
+        </div>
+    </div>
+</form>
+
+<table id="demo" lay-filter="test" edit='text'></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" data-method="confirmTrans" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="gbannerTpl">
+    {{# let arr = d.gbanner.split(',') }}
+    {{# arr.forEach(ele=>{ }}
+    <img src="{{ele}}" alt="">
+    {{# }) }}
+</script>
+</body>
+</html>
+<script src="/flower2/public/static/layui.js"></script>
+<script>
+    const HOSTNAME = '/flower2/public/index.php';
+    layui.use(['table', 'form', 'layer'], function () {
+        let table = layui.table, $ = layui.$, layer = layui.layer, form = layui.form;
+        // let {table, $, form} = layui;
+        //第一个实例
+        table.render({
+            elem: '#demo',//容器
+            // height: 400,
+            url: HOSTNAME + '/admin/goods/query',//数据接口
+            page: true,//开启分页
+            limit: 3,//每页显示的条数
+            cols: [[ //设置表头
+                {field: 'gname', edit: 'text', title: '商品名称', fixed: 'left'},
+                {field: 'gid', title: 'ID', edit: 'text',},
+                {field: 'gmprice', edit: 'text', title: '市场价格', templet: '<div><em>{{d.gmprice}}</em></div>'},
+                {field: 'gsale', edit: 'text', title: '零售价格', templet: '<div><em>{{d.gsale}}</em></div>'},
+                {field: 'gstock', edit: 'text', title: '库存数量', templet: '<div><em>{{d.gstock}}</em></div>'},
+                {field: 'gdetail', edit: 'text', title: '商品详情',},
+                {field: 'create_time', edit: 'text', title: '上架时间',},
+                {
+                    field: 'gthumb', edit: 'text', title: '商品缩略图', width: 100, templet: function (d) {
+                        return "<div><img src='" + d.gthumb + "'></div>"
+                    }
+                },
+                {field: 'gbanner', edit: 'text', title: '商品轮播图', width: 100, templet: '#gbannerTpl'},
+                {fixed: 'right', title: '操作', toolbar: '#barDemo',}
+            ]]
+        });
+        //搜索提交事件
+        // form.on('submit(mh)',function(data) {
+        //     console.log(data);
+        //     let field = data.field;
+        //     console.log(field);
+        //     table.reload('demo', {
+        //         url: HOSTNAME + '/admin/goods/query',
+        //         where: field,//设定异步数据接口的额外参数，任意设
+        //         page: {curr: 1},//curr:起始页跳转的页数
+        //     })
+        //     return false;
+        // })
+        form.on('submit(demo1)', function (data) {
+            let data1 = data.field;
+            table.reload('demo', {
+                url: HOSTNAME + '/admin/goods/query',
+                where: data1,
+                page: {
+                    curr: 1
+                }
+            })
+            return false;
+        })
+        //工具栏事件
+        //tool里面是table中设置的属性：lay-filter的值
+        //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        table.on('tool(test)', function (obj) {
+            let data = obj.data;
+            if (obj.event === 'del') {
+                $.ajax({
+                    url: HOSTNAME + '/admin/goods/delete',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (res) {
+                        if (res.code == 200) {
+                            layer.alert(res.msg);
+                            obj.del();
+                        } else {
+                            layer.alert(res.msg);
+                        }
+
+                    }
+                })
+            } else if (obj.event === 'edit') {
+                layer.alert('点击表格即可进行编辑');
+                //编辑更新数据
+            }
+
+
+        });
+        table.on('edit(test)', function (obj) {
+            let value = obj.value;
+            let gid = obj.data.gid;
+            let field = obj.field;
+            // layer.open({type:3,icon:1, })
+            let index = layer.load(2);
+            $.ajax({
+                url: HOSTNAME + '/admin/goods/update',
+                type: 'POST',
+                dataType: 'json',
+                data: {value, gid, field},
+                success: function (res) {
+                    if (res.code == 200) {
+                        obj.update();
+                        layer.close(index);
+                        layer.alert(res.msg);
+                    } else {
+                        layer.alert(res.msg);
+                    }
+                }
+            })
+        })
+    })
+</script>

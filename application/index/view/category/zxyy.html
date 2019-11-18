@@ -1,0 +1,193 @@
+{include file='public/header' title=$title/}
+    <title>在线预约</title>
+<!--<link rel="stylesheet" href="/flower2/public/static/css/layui.css " media="all">-->
+<link rel="stylesheet" href="__CSS_PATH__zxyy.css">
+
+<!-- 底部部分结束 -->
+    <div class="photo-big">
+        <div class="container">
+            <div class="row">
+                <!-- 图片部分开始 -->
+                <div class="picture col-1g-12  col-md-12  col-sm-12 col-xs-12" style="width: 100%;height:100%">
+                    <div class="image">
+                        <img src="__IMG_PATH__order/BannerTwo.jpg" alt="">
+                    </div>
+                    <!-- 图片部分结束 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 在线预约开始 -->
+
+    <div class="big container">
+        <div class="row">
+            <div class="main-tittle">
+                <div class="col-xs-5">
+                    <div class="left-line"></div>
+                </div>
+
+                <div class="middle">
+                    <div class="col-xs-2">
+                        <h1>{$currnav.nname}</h1>
+                        <p>{$currnav.ename}</p>
+                    </div>
+                </div>
+
+                <div class="col-xs-5">
+                    <div class="right-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 在线预约结束 -->
+    <!-- 表格部分开始 -->
+    <div class="box">
+        <div class="container">
+            <div class="row">
+
+                <div class="middle-left col-lg-3"></div>
+                <div class="middle-box col-lg-6">
+                    <form>
+                        <!-- 预约服务文本框部分开始 -->
+                        <div class="a-line">
+                            <div class="text">
+                                <span>预约服务:</span>
+                            </div>
+                            <div class="input-one">
+                                <select class="option-one" name="aname" id="exampleInputAname1">
+                                    <option value="俄罗斯紫皮糖">俄罗斯紫皮糖</option>
+                                    <option value="日本香体糖">日本香体糖</option>
+                                    <option value="绿箭薄荷糖">绿箭薄荷糖</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 预约服务部分文本框结束 -->
+                        <!-- 预约日期部分开始 -->
+                        <div class="second">
+                            <div class="text-two">
+                                <span>预约日期:</span>
+                            </div>
+                            <div class="input-two">
+                                <input type="date" name="atime" class="calendar" id="exampleInputAtime1">
+                            </div>
+                            <div class="prompt">
+                                <span><i class="iconfont icon-jinggao"></i>这是一个必填项哦</span>
+                            </div>
+
+                        </div>
+                        <!-- 预约日期部分结束 -->
+                        <!-- 您的姓名部分开始 -->
+                        <div class="name">
+                            <div class="name-text">
+                                <span>您的姓名:</span>
+                            </div>
+
+                            <div class="input-three">
+                                <input type="text" name="username" class="content-name" id="exampleInputUser1">
+                            </div>
+                            <div class="prompt-two">
+                                <span><i class="iconfont icon-jinggao"></i>这是一个必填项哦</span>
+                            </div>
+                        </div>
+                        <!-- 您的姓名部分结束 -->
+                        <!-- 您的性别部分开始 -->
+                        <div class="cender">
+                            <div class="cender-text">
+                                <span>您的性别:</span>
+                            </div>
+
+                            <div class="input-four">
+                                <input id="nan" type="radio" name="sex" value="男">男
+                                <input id="nv" type="radio" name="sex" value="女">女
+                            </div>
+                            <div class="prompt-thee">
+                                <span><i class="iconfont icon-jinggao"></i>这是一个必填项哦</span>
+                            </div>
+                        </div>
+                        <!-- 您的性别部分结束 -->
+                        <!-- 您的电话部分开始 -->
+                        <div class="telephone">
+                            <div class="telephone-text">
+                                <span>您的电话:</span>
+                            </div>
+                            <div class="input-five">
+                                <input type="text" name="telephone" class="telephone-name" id="exampleInputTele1">
+                            </div>
+                        </div>
+                        <div class="prompt-four">
+                            <span><i class="iconfont icon-jinggao"></i>这是一个必填项哦</span>
+                        </div>
+                        <!-- 您的电话部分结束 -->
+                        <!-- 补充说明部分开始 -->
+                        <div class="supplement">
+                            <div class="supplement-text">
+                                <span>补充说明:</span>
+                            </div>
+                            <div class="frame">
+                        <textarea class="supplement-name" name="supp" id="exampleInputSupp1" cols="30"
+                                  rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="prompt-five">
+                            <span><i class="iconfont icon-jinggao"></i>这是一个必填项哦</span>
+                        </div>
+                        <!-- 补充说明部分结束 -->
+                        <!-- 验证码部分开始 -->
+                        <div class="code">
+                            <div class="code-text">
+                                <span>验证码:</span>
+                            </div>
+                            <div class="input-six">
+                                <!--<input type="text" class="code-name">-->
+                                    <input type="text" name="code" required lay-verify="required" placeholder="请输入验证码" autocomplete="off"
+                                           class="code-name">
+                                    <img src="{:captcha_src()}" alt="captcha" width="150px" height="40px"
+                                         onclick=this.src=this.src+'?a='+Date.now()
+                                    />
+                            </div>
+
+                            <!--<div class="verification">-->
+
+                            <!--</div>-->
+                            <div class="prompt-six">
+                                <span><i class="iconfont icon-jinggao"></i>这是一个必填项哦</span>
+                            </div>
+                        </div>
+                        <!-- 验证码部分结束 -->
+                        <!-- 提交预约部分开始 -->
+                        <!--<div class="submit">-->
+                        <!--<span>提交预约</span>-->
+                        <button type="submit" class="submit" style="border: none;color: white">提交预约</button>
+                        <!--</div>-->
+                    </form>
+                </div>
+                <div class="middle-right col-lg-3"></div>
+            </div>
+        </div>
+    </div>
+<div class="content" style="height: 30px;"></div>
+{include file='public/footer' /}
+<script src="/flower2/public/static/layui.js"></script>
+<script src="__JS_PATH__jquery-3.4.1.min.js"></script>
+<script src="__JS_PATH__zxyy.js"></script>
+<script src="__JS_PATH__com.js"></script>
+
+<script>
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        let qs = $(this).serialize();
+        console.log(qs);
+        $.ajax({
+            url:'/flower2/public/index.php/index/opim/insert',
+            type:'POST',
+            dataType:'json',
+            data:qs,
+            context:this,
+            success:function (res) {
+                this.reset();
+                alert(res.msg);
+            }
+        });
+    })
+
+</script>

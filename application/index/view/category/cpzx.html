@@ -1,0 +1,63 @@
+{include file='public/header' title=$title/}
+    <link rel="stylesheet" href="__CSS_PATH__cpzx.css">
+        <div class="container">
+            <div class="row">
+                <!-- 图片开始 -->
+                <div class="tu  ">
+                    <img src="__IMG_PATH__product/BannerTwo.jpg" alt="">
+                </div>
+                <!-- 图片结束 -->
+                <!-- 分割栏开始 -->
+                <div class="fg col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class=" left "></div>
+                    <div class="flow  ">
+                        <div class="top ">{$currnav.nname}</div>
+                        <div class="down">{$currnav.ename}</div>
+                    </div>
+                    <div class=" right "></div>
+                </div>
+                <!-- 分割栏结束 -->
+                <div class="cp   col-lg-12">
+                    <ul class="bq  col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                        {volist name='cate' id="ev"}
+                            <li class="item hr">{$ev['cname']}</li>
+                        {/volist}
+                    </ul>
+                    {volist name='datas' id="data"}
+                    <div class="bb">
+                        {volist name="$data" id="v"}
+                        <div class="zp col-xs-3 col-md-3 col-sm-3 col-xs-3 ">
+                            <a href="goods?gid={$v['gid']}">
+                                <div class="tp">
+                                    <img src="{$v['gthumb']}" alt="">
+                                </div>
+                                <div style="text-align: center">
+                                    <a href="goods?gid={$v['gid']}"> {$v['gname']}</a></div>
+                            </a>
+                        </div>
+                        {/volist}
+                    </div>
+                    {/volist}
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="content" style="height: 250px;"></div>
+{include file='public/footer' /}
+<script src="__JS_PATH__jquery-3.4.1.min.js"></script>
+<script>
+    let box = $('.bq').children("li");
+    let ul = $('.cp').children(".bb");
+
+    ul.css("display", "none");
+    ul[0].style.display = "block";
+    for (let i = 0; i < box.length; i++) {
+        box[i].onclick = function () {
+            for (let j = 0; j < box.length; j++) {
+                ul[j].style.display = "none";
+            }
+            ul[i].style.display = "block";
+        }
+    }
+</script>
+<script src="__JS_PATH__com.js"></script>

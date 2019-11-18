@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品</title>
+    <link rel="stylesheet" href="/flower2/public/static/css/layui.css">
+    <style>
+    </style>
+</head>
+<body>
+<form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属分类</label>
+        <div class="layui-input-block">
+            <select name="cid" lay-verify="required">
+                {volist name='cates' id='v'}
+                <option value="{$v.id}">{$v.cname}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品名称</label>
+        <div class="layui-input-block">
+            <input lay-verify="required|nname" type="text" name="gname" placeholder="请输入3-10个字符的商品名称" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">市场价格</label>
+        <div class="layui-input-block">
+            <input lay-verify="required|number" type="text" name="gmprice" placeholder="请输入市场价格" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">零售价格</label>
+        <div class="layui-input-block">
+            <input lay-verify="required|number" type="text" name="gsale" placeholder="请输入零售价格" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">库存量</label>
+        <div class="layui-input-block">
+            <input lay-verify="required|number" type="text" name="gstock" placeholder="请输入库存数量" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品详情</label>
+        <div class="layui-input-block">
+            <textarea class="layui-input" type="text"  id="gdetail" name="gdetail"  autocomplete="off" placeholder="请输入商品详情" style="display: none;"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品缩略图</label>
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="test1">上传图片</button>
+            <span style="color: #8c8c8c">图片上传最佳比例1:1，最大不超过200KB</span>
+            <div class="layui-input-block">
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                    预览图：
+                    <div class="layui-upload-list" id="demo1">
+                        <img src="" alt=""  width="100px" id="gthumb">
+                    </div>
+                    <input type="hidden" name="gthumb">
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品轮播图</label>
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="test2">多图片上传</button>
+            <span style="color: #8c8c8c">图片上传最佳比例1:1，最大不超过200KB</span>
+            <div class="layui-input-block">
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                    预览图：
+                    <div class="layui-upload-list" id="gbanner">
+                    </div>
+                    <input type="hidden" name="gbanner">
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="go">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+</body>
+</html>
+<script src="/flower2/public/static/layui.js"></script>
+<script>
+    const HOSTHOME = '/flower2/public/index.php';
+    layui.use(['form', 'upload','layedit'], function () {
+        // let form = layui.form, $ = layui.$, upload = layui.upload;
+        let {$, form, upload,layedit} = layui;
+        //建立编辑器
+        let index = layedit.build('gdetail',{
+            height: 150, //设置编辑器高度
+        });
+        //提交
+        form.on('submit(go)', function (data) {
+            let {$, form} = layui;
+            let qs = data.field;
+            delete qs.file;//截取字段file
+            // qs.gbanner = qs.gbanner.substr(0,qs.gbanner.length-1);
+            qs.gbanner = qs.gbanner.slice(0,-1);//截取逗号
+            qs.gdetail = layedit.getContent(index);
+            $.ajax({
+                url: HOSTHOME +'/admin/goods/insert',
+                type: 'POST',
+                dataType: 'json',
+                data: qs,
+                success: function (res) {
+                    if (res.code == 200) {
+                        layer.alert(res.msg);
+                        $('form')[0].reset();
+                        layedit.setContent(index,'',false);
+                        $('input[type=hidden]').val('');
+                        $('#gthumb').attr('src','');
+                        $('#gbanner>img').remove();
+                    } else {
+                        layer.alert(res.msg);
+                    }
+
+                }
+            })
+            return false;
+        })
+        //普通图片上传
+         upload.render({
+            elem: '#test1',
+            url: HOSTHOME + '/admin/upload/index',
+            accept: 'images',
+            acceptMime: 'image/*',
+            size: 200,
+            done: function (res) {
+                if (res.code == 0) {
+                    $('#gthumb').attr('src', res.data.src);
+                    $('input[name=gthumb]').val(res.data.src);
+                }
+            },
+        });
+        //多图片上传
+        upload.render({
+            elem: '#test2',
+             url:  HOSTHOME + '/admin/upload/index',
+             multiple: true,
+             done: function (res) {
+                if(res.code==0){
+                    $('<img>').attr('src',res.data.src).css('width',100).appendTo('#gbanner')
+                    $('input[name=gbanner]').val((index,value)=>value+res.data.src+',');
+                }
+            }
+        });
+    })
+</script>

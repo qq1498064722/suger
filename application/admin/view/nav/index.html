@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>查看导航</title>
+    <link rel="stylesheet" href="/flower2/public/static/css/layui.css " media="all">
+    <style>
+    </style>
+</head>
+<body>
+<table id="demo" lay-filter="test" edit="text"></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+</body>
+</html>
+<script src="/flower2/public/static/layui.js"></script>
+<script>
+    const HOSTNAME = '/flower2/public/index.php';
+    layui.use('table', function () {
+        let table = layui.table, $ = layui.$;
+        //第一个实例
+        table.render({
+            elem: '#demo',//容器
+            height: 312,
+            url: HOSTNAME + '/admin/nav/query',//数据接口
+            page: true,//开启分页
+            cols: [[ //设置表头
+                {field: 'id', title: 'ID', edit: 'text', sort: true, fixed: 'left'},
+                {field: 'nname', edit: 'text', title: '导航名称',},
+                {field: 'ename', edit: 'text', title: '英文名称', templet: '<div><em>{{d.ename}}</em></div>'},
+                {field: 'nsort', edit: 'text', title: '排序',},
+                {field: 'ntpl', edit: 'text', title: '模板',},
+                {fixed: 'right', title: '操作', toolbar: '#barDemo',}
+            ]]
+        });
+
+        //工具栏事件删除
+        //tool里面是table中设置的属性：lay-filter的值
+        //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        table.on('tool(test)', function (obj) {
+            // console.dir(obj);
+            let data = obj.data;
+            // console.log(id);
+            if (obj.event === 'del') {
+                $.ajax({
+                    url: HOSTNAME + '/admin/nav/delete',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (res) {
+                        if (res.code == 200) {
+                            layer.alert(res.msg);
+                            obj.del();
+                        } else {
+                            layer.alert(res.msg);
+                        }
+
+                    }
+                })
+            } else if (obj.event === 'edit') {
+                layer.alert('点击表格即可进行编辑');
+                //编辑更新数据
+            }
+        });
+          //工具栏事件编辑
+        table.on('edit(test)', function (obj) {
+            let value = obj.value;
+            let id = obj.data.id;
+            let field = obj.field;
+            // layer.open({type:3,icon:1, })
+            // let  index = layer.load(2);
+            $.ajax({
+                url: HOSTNAME + '/admin/nav/update',
+                type: 'POST',
+                dataType: 'json',
+                data: {value, id, field},
+                success: function (res) {
+                    if (res.code == 200) {
+                        obj.update();
+                        // layer.close(index);
+                        layer.alert(res.msg);
+                    } else {
+                        layer.alert(res.msg);
+                    }
+                }
+            })
+        })
+        return false;
+    });
+</script>
